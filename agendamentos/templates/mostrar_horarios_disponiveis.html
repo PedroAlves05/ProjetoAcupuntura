@@ -1,0 +1,52 @@
+{% extends "bases/base_agendamentos.html" %} {% load static %} {% block 'head'%}
+
+<link href="{% static 'agendamentos/CSS/css.css' %}" rel="stylesheet" />
+
+{% endblock 'head' %} {% block 'conteudo' %}
+<br />
+<br />
+<div class="container">
+  {% if messages %}
+  <br />
+  {% for message in messages %}
+  <div class="alert {{ message.tags }}">{{ message }}</div>
+  {% endfor %} {% endif %}
+  <form action="" method="POST">
+    {% csrf_token %}
+
+    <input type="hidden" value="{{exame.id}}" name="exame" />
+    <label class="font-nova"
+      >Data de Agendamento para o exame: {{ exame.nome }}</label
+    >
+    <br />
+
+    <input type="date" class="input-default" name="data" />
+    <br />
+    <br />
+    <input type="submit" class="btn-default" value="Pesquisar Horários" />
+  </form>
+  {% if horarios %}
+  <form action="{% url 'fechar_pedido' %}" method="POST">
+    {% csrf_token %}
+    <h1 class="font-nova">Horários Disponíveis em {{ data }}</h1>
+    <ul>
+      {% for horario in horarios %}
+      <input type="hidden" value="{{ exame.id }}" name="exame" />
+      <input type="hidden" value="{{ data }}" name="data" />
+      <input
+        type="submit"
+        class="btn-default"
+        value="{{ horario.hora }}"
+        name="hora"
+      />
+      <br />
+      <br />
+      {% empty %}
+      <li class="font-destaque-secundaria">
+        Nenhum horário disponível para esta data.
+      </li>
+      {% endfor %}
+    </ul>
+  </form>
+  {% endif %} {% endblock %}
+</div>

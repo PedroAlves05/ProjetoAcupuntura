@@ -1,0 +1,91 @@
+{% extends "bases/base_principal.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'usuarios/css/base1.css' %}" rel="stylesheet">
+    <style>
+        input.input-default {
+            opacity: 0.75;
+            width: 100%;
+            margin-bottom: 10px;
+            font-size: 14px;
+            opacity: 0.90;
+        }
+        .container {
+        background-color: #ffffff; /* Cor de fundo do container */
+        border-radius: 8px; /* Cantos arredondados */
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        padding: 20px; /* Espaçamento interno */
+        max-width: 600px; /* Largura máxima do container */
+        width: 100%;
+        margin: 20px auto; /* Margens para centralizar */
+        text-align: center;
+        }
+
+        h3.font-nova {
+            text-align: center;
+        }
+
+        /* Centralizar o formulário na página */
+        .form-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 40vh; /* Ajuste a altura conforme necessário */
+        }
+
+        /* Estilo do formulário */
+        .login-form {
+            width: 60%; /* Ajuste a largura conforme necessário */
+        }
+
+        /* Estilo do botão de login */
+        input.btn {
+            width: 100%; /* Ocupar a largura total do contêiner */
+        }
+
+        /* Centralizar o link de cadastro */
+        .signup-link {
+            text-align: center;
+            margin-top: 10px; /* Ajuste a margem conforme necessário */
+        }
+    </style>
+{% endblock 'head' %}
+
+{% block 'conteudo' %}
+    <div class="container">
+        <h3 class="font-nova">
+            <img width="10%" src="{% static 'geral/img/logo.png' %}" alt="">Login
+        </h3>
+
+        {% if messages %}
+            <br>
+            {% for message in messages %}
+                <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+
+        <!-- Container do formulário -->
+        <div class="form-container">
+            <form class="login-form" action="{% url 'Login' %}" method="POST">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Nome de Usuário</label>
+                    <br>
+                    <input type="text" class="input-default form-control" id="username" name="username">
+                </div>
+                <div class="form-group">
+                    <label for="senha">Senha</label>
+                    <br>
+                    <input type="password" class="input-default form-control" id="senha" name="senha">
+                </div>
+                <input type="submit" class="btn btn-default" value="Logar">
+            </form>
+        </div>
+
+        <!-- Link de cadastro centralizado -->
+        <div class="signup-link">
+            <a href={% url 'cadastro' %}>Não possui cadastro? Cadastre-se aqui</a>
+        </div>
+    </div>
+{% endblock %}

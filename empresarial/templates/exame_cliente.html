@@ -1,0 +1,134 @@
+{% extends "bases/base_empresarial.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'agendamentos/css/css.css' %}" rel="stylesheet">
+    <link href="{% static 'exames/css/gerenciar_pedidos.css' %}" rel="stylesheet">
+{% endblock 'head' %}
+
+
+{% block 'conteudo' %}
+    <br>
+    <div class="container">
+        {% if messages %}
+            <br>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    
+        <div class="row">
+        <div class="col-md-3">
+        
+        <h3 class="font-destaque">{{exame.usuario.get_full_name}}</h3>
+        <p>{{exame.usuario.email}}</p>
+        <br>
+            
+    </div>
+                
+            <form action="{% url "criar_procedimento" exame.id %}" method="POST" enctype="multipart/form-data">{% csrf_token %}
+            </div>
+            <div class="col-md-6">
+                <h3 class="font-destaque">{{exame.exame}}</h3>
+                <p>{{exame.data}}</p>
+                <h2>Pontos tratados</h2>
+                <input type="checkbox" name="Olho" id="Olho" {% if procedimentos.Olho %}checked{% endif %}><label for="">Olho</label>
+                <br>
+                <input type="checkbox" name="Olfativo" id="Olfativo" {% if procedimentos.Olfativo %}checked{% endif %}><label for="">Olfativo</label>
+                <br>
+                <input type="checkbox" name="Mandibular" id="Mandibular" {% if procedimentos.Mandibular %}checked{% endif %}><label for="">Mandibular</label>
+                <br>
+                <input type="checkbox" name="Pulmões" id="Pulmões" {% if procedimentos.Pulmões %}checked{% endif %}><label for="">Pulmões</label>
+                <br>
+                <input type="checkbox" name="Auditivo" id="Auditivo" {% if procedimentos.Auditivo %}checked{% endif %}><label for="">Auditivo</label>
+                <br>
+                <input type="checkbox" name="Estômago" id="Estômago" {% if procedimentos.Estômago %}checked{% endif %}><label for="">Estômago</label>
+                <br>
+                <input type="checkbox" name="Garganta" id="Garganta" {% if procedimentos.Garganta %}checked{% endif %}><label for="">Garganta</label>
+                <br>
+                <input type="checkbox" name="Gônadas" id="Gônadas" {% if procedimentos.Gônadas %}checked{% endif %}><label for="">Gônadas</label>
+                <br>
+                <input type="checkbox" name="Pâncreas" id="Pâncreas" {% if procedimentos.Pâncreas %}checked{% endif %}><label for="">Pâncreas</label>
+                <br>
+                <input type="checkbox" name="Coração" id="Coração" {% if procedimentos.Coração %}checked{% endif %}><label for="">Coração</label>
+                <br>
+                <input type="checkbox" name="Fígado" id="Fígado" {% if procedimentos.Fígado %}checked{% endif %}><label for="">Fígado</label>
+                <br>
+                <input type="checkbox" name="Retal" id="Retal" {% if procedimentos.Retal %}checked{% endif %}><label for="">Retal</label>
+                <br>
+                <input type="checkbox" name="Ciático" id="Ciático" {% if procedimentos.Ciático %}checked{% endif %}><label for="">Ciático</label>
+                <br>
+                <input type="checkbox" name="Joelho" id="Joelho" {% if procedimentos.Joelho %}checked{% endif %}><label for="">Joelho</label>
+                <br>
+                <input type="checkbox" name="Rim" id="Rim" {% if procedimentos.Rim %}checked{% endif %}><label for="">Rim</label>
+                <br>
+                <input type="checkbox" name="Trigêmeo" id="Trigêmeo" {% if procedimentos.Trigêmeo %}checked{% endif %}><label for="">Trigêmeo</label>
+                <br>
+                <input type="checkbox" name="Agressividade" id="Agressividade" {% if procedimentos.Agressividade %}checked{% endif %}><label for="">Agressividade</label>
+                <br>
+                <input type="checkbox" name="Tragus" id="Tragus" {% if procedimentos.Tragus %}checked{% endif %}><label for="">Tragus</label>
+                <br>
+                <input type="checkbox" name="Pele" id="Pele" {% if procedimentos.Pele %}checked{% endif %}><label for="">Pele</label>
+                <br>
+                <input type="checkbox" name="Ombro" id="Ombro" {% if procedimentos.Ombro %}checked{% endif %}><label for="">Ombro</label>
+                <br>
+                <input type="checkbox" name="Zero" id="Zero"{% if procedimentos.Zero %}checked{% endif %} ><label for="">Zero</label>
+                <br>
+                <input type="checkbox" name="M_inferiores" id="M_inferiores" {% if procedimentos.M_inferiores %}checked{% endif %}><label for="">M_inferiores</label>
+                <br>
+                <input type="checkbox" name="M_superiores" id="M_superiores" {% if procedimentos.M_superiores %}checked{% endif %}><label for="">M_superiores</label>
+                <br>
+                <input type="checkbox" name="Alergia" id="Alergia" {% if procedimentos.Alergia %}checked{% endif %}><label for="">Alergia</label>
+                <br>
+                <input type="checkbox" name="Darwin" id="Darwin" {% if procedimentos.Darwin %}checked{% endif %}><label for="">Darwin</label>
+                <br>
+                <input type="checkbox" name="Síntese" id="Síntese" {% if procedimentos.Síntese %}checked{% endif %}><label for="">Síntese</label>
+                <br>
+                <input type="checkbox" name="Tálamo" id="Tálamo" {% if procedimentos.Tálamo %}checked{% endif %}><label for="">Tálamo</label>
+                <br>
+                <input type="checkbox" name="Occipital" id="Occipital" {% if procedimentos.Occipital %}checked{% endif %}><label for="">Occipital</label>
+                <br>
+                <input type="checkbox" name="Genital" id="Genital" {% if procedimentos.Genital %}checked{% endif %}><label for="">Genital</label>
+                <br>
+                <input type="checkbox" name="Medular" id="Medular" {% if procedimentos.Medular %}checked{% endif %}><label for="">Medular</label>
+                <br>
+            </div>
+                <div class="col-md-6">
+                <h2>Outros</h2>
+                <input type="checkbox" name="Hipotálamo" id="Hipotálamo" {% if procedimentos.Hipotálamo %}checked{% endif %}><label for="">Hipotálamo</label>
+                <br>
+                <input type="checkbox" name="Sacro" id="Sacro" {% if procedimentos.Sacro %}checked{% endif %}><label for="">Sacro</label>
+                <br>
+                <input type="checkbox" name="Ponto_de_muro" id="Ponto_de_muro" {% if procedimentos.Ponto_de_muro %}checked{% endif %}><label for="">Ponto de muro</label>
+                <br>
+                <input type="checkbox" name="Cóccix" id="Cóccix" {% if procedimentos.Cóccix %}checked{% endif %}><label for="">Cóccix</label>
+                <br>
+                <input type="checkbox" name="Cervical" id="Cervical" {% if procedimentos.Cervical %}checked{% endif %}><label for="">Cervical</label>
+                <br>
+                <input type="checkbox" name="Hipófise" id="Hipófise" {% if procedimentos.Hipófise %}checked{% endif %}><label for="">Hipófise</label>
+                <br>
+                <input type="checkbox" name="Torácica" id="Torácica" {% if procedimentos.Torácica %}checked{% endif %}><label for="">Torácica</label>
+                <br>
+                <input type="checkbox" name="Pineal" id="Pineal" {% if procedimentos.Pineal %}checked{% endif %}><label for="">Pineal</label>
+                <br>
+                <input type="checkbox" name="Lombar" id="Lombar" {% if procedimentos.Lombar %}checked{% endif %}><label for="">Lombar</label>
+                <br>
+                <input type="checkbox" name="adrenal" id="adrenal" {% if procedimentos.adrenal %}checked{% endif %}><label for="">adrenal</label>
+                <br>
+            </div>
+                <div class="col-md-6">
+                    <h2>Relatorio anterior: {{procedimentos.pontosUsados}}</h2>
+                    <label for="Relatorio" class="form-label">Relatorio</label>
+                    <textarea class="form-control" name="Relatorio" id="Relatorio" rows="8"></textarea>
+                <br>
+                <input type="checkbox" name="Confirmar_pagamento" id="Confirmar_pagamento" {% if procedimentos.Pagamento %}checked{% endif %}><label for="">Confirmar pagamento</label>
+                <br>
+                <input type="submit" value="Salvar" class="btn-default">
+            </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock 'conteudo' %}

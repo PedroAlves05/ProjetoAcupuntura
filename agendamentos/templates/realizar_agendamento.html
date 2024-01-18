@@ -1,0 +1,80 @@
+{% extends "bases/base_agendamentos.html" %}
+
+{% load static %} 
+{% block 'head' %}
+
+<link href="{% static 'agendamentos/CSS/css.css' %}" rel="stylesheet" />
+
+{% endblock 'head' %} {% block 'conteudo' %}
+<br />
+<style>
+  h4 {
+    color: black;
+  }
+  .btn-secundario {
+    background-color: #6de6ee;
+  }
+</style>
+<br />
+<div class="container">
+  {% if messages %}
+  <br />
+  {% for message in messages %}
+  <div class="alert {{ message.tags }}">{{ message }}</div>
+  {% endfor %} {% endif %}
+  <div class="container">
+    <div class="row">
+      <div class="col-md">
+        <h3 class="font-nova">Escolha o Exame para realizar o agendamento</h3>
+
+        <form action="" method="POST">{% csrf_token %}
+          <label for="">Selecione o exame para realizar</label>
+          <select class="select form-control bg-select" name="exames">
+            {% for exame in exames %} {% if exame.disponivel %}
+            <option class="opt" value="{{exame.id}}">{{exame}}</option>
+            {% endif %} {% endfor %}
+          </select>
+          <br />
+          <input
+            type="submit"
+            class="btn-default tamanho-2"
+            name="ultimo_nome"
+            value="Solicitar exames"
+          />
+        </form>
+      </div>
+
+      <div class="col-md-2"></div>
+
+      <div class="col-md card">
+        {% if solicitacao_exames %} {% for exame in solicitacao_exames %}
+        <div style="font-size: 20px; font-weight: bold">{{exame.nome}}</div>
+
+        <hr style="color: white" />
+        <div>
+          <label>Preço: </label
+          ><label class="previa-preco">R${{exame.preco}}</label>
+          <br />
+          <label>Duração: </label
+          ><label class="previa-preco">{{exame.duracao}}</label>
+        </div>
+        <br />
+
+        {% endfor %}
+        <br />
+
+        <form action="{% url 'mostrar_horarios_disponiveis' %}" method="POST">
+          {% csrf_token %} {% for exame in solicitacao_exames %}
+          <input type="hidden" value="{{exame.id}}" name="exame" />
+          {% endfor %}
+          <button class="btn-secundario">Fechar pedido</button>
+        </form>
+        {% else %}
+        <h4>Nenhum exame solicitado</h4>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% endblock 'conteudo' %}
+</div>

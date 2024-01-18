@@ -1,0 +1,74 @@
+{% extends "bases/base_empresarial.html" %}
+{% load static %}
+
+{% block 'head' %}
+    <link href="{% static 'agendamentos/css/css.css' %}" rel="stylesheet">
+    <link href="{% static 'agendamentos/css/filtrar.css' %}" rel="stylesheet">
+    <style>
+        table{
+            background-color: #d3d3d3
+        }
+    </style>
+{% endblock 'head' %}
+
+
+{% block 'conteudo' %}
+    <br> 
+    <br>
+    <div class="container">
+        {% if messages %}
+            <br>
+            {% for message in messages %}
+            <div class="alert {{ message.tags }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+        <div class="row">
+            <div class="col-md">
+                <form action="{% url "filtrar" %}" method="GET">
+                <label for="">Nome</label>
+                <input type="text" class="form-control" name="nome">
+            </div>
+            <div class="col-md">
+                <label for="">E-mail</label>
+                <input type="text" class="form-control" name="email">
+            </div>
+            <div class="col-md">
+                <label for="">username</label>
+                <input type="text" class="form-control" name="username">
+            </div>
+            <div class="col-md">
+                <br>
+                <input type="submit" class="btn btn-primary" value="Enviar">
+                </form>
+
+            </div>
+        </div>
+        <br>
+        <div class="card card-view">
+            <table>
+                <tr>
+                  <th>Nome</th>
+                  <th>E-mail</th>
+                  <th>username</th>
+                </tr>
+
+                {% for cliente in clientes %}
+                    <tr class="linha-tabela">
+                        <td><a href="{% url "cliente" cliente.id %}">{{cliente.get_full_name}}</a></td>
+                        <td>{{cliente.email}}</td>
+                        <td>{{cliente.username}}</td>
+                        
+                        <td>
+                        
+                        </td>
+                    </tr>
+                {% endfor %}
+               
+              </table>
+              
+            
+        </div>
+
+    </div>
+
+{% endblock 'conteudo' %}

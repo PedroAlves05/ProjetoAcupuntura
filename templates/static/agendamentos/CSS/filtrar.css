@@ -1,0 +1,14 @@
+.linha-tabela{
+    
+}
+
+td, th{
+    padding: 20px;
+}
+
+.card-view{
+    text-align: center;
+    padding: 0;
+    border: none;
+    height: 70vh;
+}

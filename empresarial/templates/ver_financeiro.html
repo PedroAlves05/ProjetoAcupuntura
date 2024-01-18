@@ -1,0 +1,56 @@
+{% extends "bases/base_empresarial.html" %} {% load static %} {% block 'head' %}
+<link href="{% static 'agendamentos/css/css.css' %}" rel="stylesheet" />
+<link href="{% static 'agendamentos/css/filtrar.css' %}" rel="stylesheet" />
+<style>
+  body {
+    background-color: #f7e7ce;
+  }
+  table {
+    background-color: #d3d3d3;
+    width: 80%;
+    margin: auto;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th,
+  td {
+    padding: 10px;
+    text-align: center;
+    border: 1px solid #ddd;
+  }
+
+  th {
+    background-color: #f2f2f2;
+  }
+</style>
+{% endblock 'head' %} {% block 'conteudo' %}
+<br />
+<br />
+<h3 style="text-align: center">Seu saldo está em R${{ saldo }}</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th>Descrição</th>
+      <th>Valor</th>
+      <th>Data</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for despesa in despesas %}
+    <tr>
+      <td>{{ despesa.novoGasto }}</td>
+      <td>{{ despesa.valorGasto }}</td>
+      <td>{{ despesa.dataGasto }}</td>
+    </tr>
+    {% endfor %} {% for receita in receitas %}
+    <tr>
+      <td>{{ receita.procedimento.exame.nome }}</td>
+      <td>{{ receita.procedimento.exame.preco }}</td>
+      <td>{{ receita.procedimento.data }}</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock 'conteudo' %}

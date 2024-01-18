@@ -1,0 +1,8 @@
+body {
+  background-color: #f7e7ce;
+  background-size: cover;
+}
+
+p {
+  color: var(--light-color);
+}
